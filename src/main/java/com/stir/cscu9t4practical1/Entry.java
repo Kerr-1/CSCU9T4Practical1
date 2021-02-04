@@ -1,11 +1,18 @@
 // This class holds information about a single training session
 package com.stir.cscu9t4practical1;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+
+import com.sun.org.apache.xml.internal.utils.SuballocatedByteVector;
+
+
 public class Entry {
   private String name;
   private Calendar dateAndTime;
   private float distance;
+ 
+
   
   public Entry (String n, int d, int m, int y, int h, int min, int s, float dist) {
     name = n;
@@ -46,7 +53,17 @@ public class Entry {
 
   public float getDistance () {
     return distance;
-  } //getYear
+  }//get distance
+  
+   public int getStart() { 
+     Calendar x = (Calendar) dateAndTime.clone();
+     x.add(Calendar.DAY_OF_WEEK, x.getFirstDayOfWeek() - x.get(Calendar.DAY_OF_WEEK));
+     //x.add(Calendar.DAY_OF_YEAR, 6);
+      return x.get(Calendar.DATE);
+   }
+
+  
+ 
 
   public String getEntry () {
    String result = getName()+" ran " + getDistance() + " km in "
