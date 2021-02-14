@@ -27,16 +27,34 @@ public class TrainingRecord {
               
           
    } // addClass
-   
+   public boolean ifDupe(String n, int d, int m, int y) {
+     boolean bool = false;
+    ListIterator<Entry> iter = tr.listIterator();
+  
+  
+    
+    while(iter.hasNext()) 
+      {
+      Entry current = iter.next();
+      if(current.getName().equals(n) && current.getDay()==d && current.getMonth()==m && current.getYear()==y) {
+        bool = true;
+        
+        }
+      } 
+     return bool;
+   }
    // look up the entry of a given day and month
    public String lookupEntry (int d, int m, int y) {
-       ListIterator<Entry> iter = tr.listIterator();
-       String result = "No entries found";
+     ListIterator<Entry> iter = tr.listIterator();
+       String result = "";
        while (iter.hasNext()) {
           Entry current = iter.next();
           if (current.getDay()==d && current.getMonth()==m && current.getYear()==y) 
-             result = current.getEntry();
+             result += current.getEntry();
             }
+       if(result.length() == 0) {
+         result = "No entries found";
+       }
        return result;
    } // lookupEntry
    
@@ -73,7 +91,7 @@ public class TrainingRecord {
     
     public void RemoveEntry(String name, int d, int m, int y) {
       ListIterator<Entry> iter = tr.listIterator();
-      List<Entry> temp =  new ArrayList<Entry>();
+      
       int index = -1;
       
       while(iter.hasNext()) 
